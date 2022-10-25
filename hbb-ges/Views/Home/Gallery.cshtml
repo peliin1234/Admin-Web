@@ -1,0 +1,154 @@
+﻿@using hbb_ges.EntityLayer.Concrete
+@model List<Gallery>
+@{
+    ViewData["Title"] = "Gallery";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    List<Category> category = hbb_ges.Controllers.HomeController.myCat();
+}
+<div class="menu_wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <div class="menu_inner clearfix">
+
+                    <div class="navbar navbar_">
+                        <div class="navbar-inner navbar-inner_">
+                            <a class="btn btn-navbar btn-navbar_" data-toggle="collapse" data-target=".nav-collapse_">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </a>
+                            <div class="nav-collapse nav-collapse_ collapse">
+                                <ul class="nav sf-menu clearfix ">
+
+                                    @foreach (var item in @category)
+                                    {
+                                        @if (@item.CategoryName == "Anasayfa")
+                                        {
+                                            <li><a href="/">@hbb_ges.Resources.Language.AnaSayfa</a></li>
+                                        }
+                                        @if (@item.CategoryName == "Hakkımızda")
+                                        {
+                                            <li><a href="/Home/About">@hbb_ges.Resources.Language.Hakkımızda</a></li>
+                                        }
+                                        @if (@item.CategoryName == "GES")
+                                        {
+                                            <li><a href="/Home/GES">@hbb_ges.Resources.Language.GES</a></li>
+                                        }
+                                        @if (@item.CategoryName == "Galeri")
+                                        {
+                                            <li class="active"><a href="/Home/Gallery">@hbb_ges.Resources.Language.Galeri</a></li>
+                                        }
+                                        @if (@item.CategoryName == "İletişim")
+                                        {
+                                            <li><a href="/Home/Contact">@hbb_ges.Resources.Language.İletişim</a></li>
+                                        }
+
+
+                                    }
+
+
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="breadcrumbs1_wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <div class="breadcrumbs1"><a href="index.html">Home</a><span></span>photo gallery</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="content2">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <div id="content2_inner">
+                    <ul class="thumbnails" id="isotope-items">
+                        @foreach (var item in Model)
+                        {
+                            <li class="span3 isotope-element isotope-filter1">
+                                <div class="thumb-isotope">
+                                    <div class="thumbnail clearfix">
+                                        <a href="/images/@item.Image">
+                                            <figure>
+                                                <img src="/images/@item.Image" style="width:100%;
+                                   height: 170px" alt="">
+                                            </figure>
+                                            <div class="caption">
+                                                @item.Name
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+
+
+                    </ul>
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+        //
+
+
+    }); //
+    $(window).load(function() {
+        //
+        // isotop
+        var $container = $('#isotope-items'),
+            $optionSet = $('#isotope-options'),
+            $optionSets = $('#isotope-filters'),
+            $optionLinks = $optionSets.find('a');
+        $container.isotope({
+            filter: '*',
+            layoutMode: 'fitRows'
+        });
+        $optionLinks.click(function() {
+            var $this = $(this);
+            // don't proceed if already selected
+            if ($this.hasClass('selected')) {
+                return false;
+            }
+            $optionSet.find('.selected').removeClass('selected');
+            $this.addClass('selected');
+
+            var selector = $(this).attr('data-filter');
+            $container.isotope({
+                filter: selector
+            });
+            return false;
+        });
+        $(window).on("resize", function(event) {
+            $container.isotope('reLayout');
+        });
+
+        // touchTouch
+        $('.thumb-isotope .thumbnail a').touchTouch();
+
+    }); //
+</script>

@@ -1,0 +1,37 @@
+﻿@model hbb_ges.EntityLayer.Concrete.About
+@using System.Linq;
+@{
+    ViewData["Title"] = "EditAbout";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+
+<br />
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">İçerik Düzenle</h6>
+    </div>
+    <div class="card-body">
+        @using (Html.BeginForm("EditAbout", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.Hidden("id",@Model.AboutID)
+
+            @Html.Label("Açıklama")
+            @Html.TextAreaFor(x=> x.AboutDetails,5,2,new{@class="form-control"})
+            @Html.ValidationMessageFor(x=> x.AboutDetails)
+
+            <br />
+
+            @Html.Label("Görsel")
+            <input type="file" class="form-control" name="video" accept="video/mp4,video/x-m4v,video/*" required />
+            <br />
+            @Html.Label("Durum")
+            @Html.CheckBoxFor(x=> x.AboutStatus,new{@class="form-control"})
+            <br />
+            <button class="btn btn-success">Güncelle</button>
+        }
+    </div>
+</div>
+
+
+

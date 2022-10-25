@@ -1,0 +1,62 @@
+﻿@using hbb_ges.EntityLayer.Concrete
+@model List<Message>
+@{
+    ViewData["Title"] = "Message";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Mesajlar </h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Kullanıcı Adı</th>
+                        <th>Kullanıcı Mail</th>
+                        <th>Konu</th>
+                        <th>Mesaj</th>
+                        <th>Tarih</th>
+                        <th>Durum</th>
+                        <th>Cevapla</th>
+                        <th>Sil</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.username</td>
+                            <td>@item.mail</td>
+                            <td>@item.subject</td>
+                            <td>@item.message</td>
+                            <td>@item.sendDate</td>
+                            
+                                @if (@item.status == true)
+                                {
+
+                                    <td><a href="/Admin/MsgState/@item.id/" class="btn btn-primary"> <i class="fa fa-envelope-open-text" /> </a></td>
+
+                                }
+                                else
+                                {
+                                    <td><a href="/Admin/MsgState/@item.id/" class="btn btn-danger"> <i class="fa fa-envelope" /> </a></td>
+
+                                }
+                            
+                            <td><a href="mailto:@item.mail" class="btn btn-success"> <i class="fa fa-mail-bulk" /> </a></td>
+                            <td><a href="/Admin/DeleteMsg/@item.id/" class="btn btn-warning" onclick="return confirm('Silmek istediğinize emin misiniz');"> <i class="fa fa-trash" /> </a></td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br />
+</div>
+

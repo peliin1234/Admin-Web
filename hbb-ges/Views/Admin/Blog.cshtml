@@ -1,0 +1,46 @@
+﻿@using hbb_ges.EntityLayer.Concrete
+@model List<Blog>
+@{
+    ViewData["Title"] = "Blog";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+
+<!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Proje Bilgileri</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Başlık</th>
+                            <th>İçerik</th>
+                            <th>Görsel</th>
+                            <th>Düzenle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.BlogID</td>
+                                <td>@item.BlogTitle</td>
+                                <td>@item.BlogContent</td>
+                                <td>@item.BlogImage</td>
+                                <td><a href="/Admin/EditBlog/@item.BlogID/" class="btn btn-info"> <i class="fa fa-edit" /> </a></td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <br />
+    </div>
+
+

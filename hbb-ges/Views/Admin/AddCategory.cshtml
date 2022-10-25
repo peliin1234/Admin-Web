@@ -1,0 +1,29 @@
+﻿@model hbb_ges.EntityLayer.Concrete.Category
+@{
+    ViewData["Title"] = "AddCategory";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<br />
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Yeni Kategori</h6>
+    </div>
+    <div class="card-body">
+        @using (Html.BeginForm("AddCategory", "Admin", FormMethod.Post))
+        {
+            @Html.Label("Kategori Adı")
+            @Html.TextBoxFor(x=> x.CategoryName,new{@class="form-control"})
+            @Html.ValidationMessageFor(x=> x.CategoryName)
+            <br />
+            @Html.Label("Kategori Açıklaması")
+            @Html.TextAreaFor(x=> x.CategoryDescription,5,2,new{@class="form-control"})
+            @Html.ValidationMessageFor(x=> x.CategoryDescription)
+            <br />
+            @Html.Label("Kategori Durum")
+            @Html.CheckBoxFor(x=> x.CategoryStatus,new{@class="form-control"})
+            <br />
+            <button class="btn btn-success">Kaydet</button>
+        }
+    </div>
+</div>

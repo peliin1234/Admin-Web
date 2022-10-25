@@ -1,0 +1,45 @@
+﻿@using hbb_ges.EntityLayer.Concrete
+@model List<Category>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Kategori Adı</th>
+                        <th>Kategori Durum</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.CategoryID</td>
+                            <td>@item.CategoryName</td>
+                            @if (@item.CategoryStatus == true)
+                            {
+                                <td><a href="/Admin/changeStatus/@item.CategoryID/" class="btn btn-primary" onclick="return confirm('Bu kategoriyi pasifleştirmek istediğinize emin misiniz?');"> <i class="fa fa-angle-up" /> </a></td>
+                            }else
+                            {
+                                <td><a href="/Admin/changeStatus/@item.CategoryID/" class="btn btn-secondary" onclick="return confirm('Bu kategoriyi aktifleştirmek istediğinize emin misiniz?');"> <i class="fa fa-angle-down" /> </a></td>
+                           
+                            }
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <br />
+</div>

@@ -1,0 +1,38 @@
+﻿@model hbb_ges.EntityLayer.Concrete.Info
+@using System.Linq;
+@{
+    ViewData["Title"] = "EditInfo";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<br />
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">İçerik Düzenle</h6>
+    </div>
+    <div class="card-body">
+        @using (Html.BeginForm("EditInfo", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+
+            @Html.Hidden("id",@Model.id)
+            @Html.Label("Başlık")
+            @Html.TextBoxFor(x=> x.title,new{@class="form-control"})
+            @Html.ValidationMessageFor(x=> x.title)
+            <br />
+            @Html.Label("Açıklama")
+            @Html.TextAreaFor(x=> x.description,5,2,new{@class="form-control"})
+            @Html.ValidationMessageFor(x=> x.description)
+
+            <br />
+            @Html.Label("Görsel")
+            <input type="file" class="form-control" name="img" required />
+            <br />
+
+            <button class="btn btn-success">Güncelle</button>
+        }
+    </div>
+</div>
+
+
+
+

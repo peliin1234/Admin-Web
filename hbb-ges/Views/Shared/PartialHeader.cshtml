@@ -1,0 +1,96 @@
+﻿@using hbb_ges.EntityLayer.Concrete
+@{
+    List<Category> category = hbb_ges.Controllers.HomeController.myCat();
+}
+<div class="top1_wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <div class="top1 clearfix">
+
+                    <header><div class="logo_wrapper"><a href="/Home/Index/" class="logo"><img src="/images/logo.png" alt=""></a></div></header>
+
+                    <div class="top2 clearfix">
+
+                        <div class="social_wrapper">
+                            <ul class="social clearfix">
+                                <li><a href="#"><img src="/images/social_ic1.png"></a></li>
+                                <li><a href="#"><img src="/images/social_ic2.png"></a></li>
+                                <li><a href="#"><img src="/images/social_ic3.png"></a></li>
+                                <li><a href="#"><img src="/images/social_ic4.png"></a></li>
+                                <li class="dropdown">
+                                    <button class="btn btn-primary btn-lg dropdown-toggle" type="button" id="dropdownMenuButton1" style="margin-top:3px" data-bs-toggle="dropdown" aria-expanded="false"><span @*class="flag-icon flag-icon-tr me-1"*@></span> <span>@hbb_ges.Resources.Language.TR</span></button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        <li>@Html.ActionLink("TR", "change", "Language",new {language = "tr"},new {@class="flag-icon flag-icon-us me-1 dropdown-item active"})</li>
+
+                                        <li>
+                                            @Html.ActionLink("EN", "change", "Language",new {language = "en"},null)
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<div class="menu_wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <div class="menu_inner clearfix">
+
+                    <div class="navbar navbar_">
+                        <div class="navbar-inner navbar-inner_">
+                            <a class="btn btn-navbar btn-navbar_" data-toggle="collapse" data-target=".nav-collapse_">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </a>
+                            <div class="nav-collapse nav-collapse_ collapse">
+                                <ul class="nav sf-menu clearfix ">
+
+                                    @foreach (var item in @category)
+                                    {
+                                        @if (@item.CategoryName == "Anasayfa")
+                                        {
+                                            <li class="active"><a href="/">@hbb_ges.Resources.Language.AnaSayfa</a></li>
+                                        }
+                                        @if (@item.CategoryName == "Hakkımızda")
+                                        {
+                                            <li><a href="/Home/About">@hbb_ges.Resources.Language.Hakkımızda</a></li>
+                                        }
+                                        @if (@item.CategoryName == "GES")
+                                        {
+                                            <li><a href="/Home/GES">@hbb_ges.Resources.Language.GES</a></li>
+                                        }
+                                        @if (@item.CategoryName == "Galeri")
+                                        {
+                                            <li><a href="/Home/Gallery">@hbb_ges.Resources.Language.Galeri</a></li>
+                                        }
+                                        @if (@item.CategoryName == "İletişim")
+                                        {
+                                            <li><a href="/Home/Contact">@hbb_ges.Resources.Language.İletişim</a></li>
+                                        }
+
+
+                                    }
+
+
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>*@

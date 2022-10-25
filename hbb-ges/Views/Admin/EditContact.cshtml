@@ -1,0 +1,41 @@
+﻿@model hbb_ges.EntityLayer.Concrete.Contact
+@using System.Linq;
+@{
+    ViewData["Title"] = "EditContact";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<br />
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">İçerik Düzenle</h6>
+    </div>
+    <div class="card-body">
+        @using (Html.BeginForm("EditContact", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+
+            @Html.Hidden("id",@Model.ContactID)
+            @Html.Label("Başlık : ")
+            @Html.Label(@Model.ContactTitle)
+            <br />
+            @Html.Label("Açıklama")
+            @Html.TextAreaFor(x=> x.ContactDescription,5,2,new{@class="form-control"})
+            @Html.ValidationMessageFor(x=> x.ContactDescription)
+
+            <br />
+            @if (@Model.ContactTitle == "Harita")
+            {
+                @Html.Label("Konum")
+                @Html.TextBoxFor(x=> x.Map,new{@class="form-control"})
+                @Html.ValidationMessageFor(x=> x.Map)
+                <br />
+            }
+
+            <button class="btn btn-success">Güncelle</button>
+        }
+    </div>
+</div>
+
+
+
+

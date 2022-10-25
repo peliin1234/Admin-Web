@@ -1,0 +1,27 @@
+﻿@model hbb_ges.Models.AddImage
+@{
+    ViewData["Title"] = "AddGallery";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<br />
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Yeni Görsel</h6>
+    </div>
+    <div class="card-body">
+        @using (Html.BeginForm("AddGallery", "Admin", FormMethod.Post,new { enctype="multipart/form-data"}))
+        {
+            @Html.Label("Görsel Adı")
+            @Html.TextBoxFor(x=> x.Name,new{@class="form-control"})
+            @Html.ValidationMessageFor(x=> x.Name)
+            <br />
+            @Html.Label("Görsel")
+            @Html.TextBoxFor(x=> x.Image,new{@type="file",@class="form-control"})
+            @Html.ValidationMessageFor(x=> x.Image)
+            <br />
+            <button class="btn btn-success">Kaydet</button>
+        }
+    </div>
+</div>
+

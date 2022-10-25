@@ -1,0 +1,36 @@
+﻿@model hbb_ges.EntityLayer.Concrete.Blog
+@using System.Linq;
+@{
+    ViewData["Title"] = "EditBlog";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<br />
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">İçerik Düzenle</h6>
+    </div>
+    <div class="card-body">
+        @using (Html.BeginForm("EditBlog", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+
+            @Html.Hidden("id",@Model.BlogID)
+            @Html.Label("Başlık")
+            @Html.TextBoxFor(x=> x.BlogTitle,new{@class="form-control"})
+            @Html.ValidationMessageFor(x=> x.BlogTitle)
+            <br />
+            @Html.Label("Açıklama")
+            @Html.TextAreaFor(x=> x.BlogContent,3,2,new{@class="form-control"})
+            @Html.ValidationMessageFor(x=> x.BlogContent)
+
+            <br />
+            @Html.Label("Görsel")
+            <input type="file" class="form-control" name="img" />
+            @Html.ValidationMessageFor(x=> x.BlogImage)
+            <br />
+
+            <button class="btn btn-success">Güncelle</button>
+        }
+    </div>
+</div>
+

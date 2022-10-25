@@ -1,0 +1,281 @@
+﻿@using hbb_ges.EntityLayer.Concrete
+@model MainPage
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@{
+    List<Category> category = hbb_ges.Controllers.HomeController.myCat();
+}
+<div class="menu_wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <div class="menu_inner clearfix">
+
+                    <div class="navbar navbar_">
+                        <div class="navbar-inner navbar-inner_">
+                            <a class="btn btn-navbar btn-navbar_" data-toggle="collapse" data-target=".nav-collapse_">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </a>
+                            <div class="nav-collapse nav-collapse_ collapse">
+                                <ul class="nav sf-menu clearfix ">
+
+                                    @foreach (var item in @category)
+                                    {
+                                        @if (@item.CategoryName == "Anasayfa")
+                                        {
+                                            <li class="active"><a href="/">@hbb_ges.Resources.Language.AnaSayfa</a></li>
+                                        }
+                                        @if (@item.CategoryName == "Hakkımızda")
+                                        {
+                                            <li><a href="/Home/About">@hbb_ges.Resources.Language.Hakkımızda</a></li>
+                                        }
+                                        @if (@item.CategoryName == "GES")
+                                        {
+                                            <li><a href="/Home/GES">@hbb_ges.Resources.Language.GES</a></li>
+                                        }
+                                        @if (@item.CategoryName == "Galeri")
+                                        {
+                                            <li><a href="/Home/Gallery">@hbb_ges.Resources.Language.Galeri</a></li>
+                                        }
+                                        @if (@item.CategoryName == "İletişim")
+                                        {
+                                            <li><a href="/Home/Contact">@hbb_ges.Resources.Language.İletişim</a></li>
+                                        }
+
+
+                                    }
+
+
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="slider_wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <div id="slider_inner">
+                    <div id="slider" class="clearfix">
+                        <div id="camera_wrap">
+                            @foreach (var item in @ViewBag.slider as List<Slider>)
+                            {
+                                <div data-src="/images/@item.Image">
+                                    <div class="camera_caption fadeIn">
+                                        <div class="txt1">@item.Title</div>
+                                        <div class="txt2">@item.SubTitle</div>
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                    <div class="menu_shadow"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<div class="banners">
+    <div class="container">
+        <div class="row">
+            @foreach (var item in ViewBag.portfolio as List<Blog>)
+            {
+                <div class="span3 banner banner1">
+                    <div class="banner_inner">
+
+                        <div class="txt1" style="height:50px;">@item.BlogTitle<br><b></b></div>
+
+                        <img src="/images/@item.BlogImage" alt="" class="img" style="height:150px;">
+
+                        <div class="txt">
+                            <div class="txt2">@item.BlogContent</div>
+                           
+                        </div>
+
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<div id="content">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <div id="content_inner">
+
+                    <div class="row">
+                        <div class="span8">
+
+                            <div class="pad_left1">
+
+                                <h1 class="cust1">@hbb_ges.Resources.Language.tanitim</h1>
+
+                                <div class="thumb1 last">
+                                    <div class="thumbnail clearfix">
+                                        <figure class=""><image src="/images/@Model.image" alt=""></figure>
+                                        <div class="caption">
+                                            <div>
+                                                <h3>@Model.title</h3>
+                                                <p>@Model.content</p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                        <div class="span4">
+                            
+                            <div class="box1">
+                              <div class="box1_top">@hbb_ges.Resources.Language.faydalar </div>
+                                <div class="box1_inner">
+
+                                    <ul class="ul1">
+                                        @foreach (var item in @ViewBag.portfolio as List<Blog>)
+                                        {
+                                            <li>@item.BlogTitle <span>@item.BlogContent</span></li>
+                                        }
+                                        
+                                    </ul>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="slider3_wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <div class="slider3_txt_wrapper">
+
+                    <div class="slider3_txt">@hbb_ges.Resources.Language.Galeri</div>
+                    <a class="prev3" href="#"></a>
+                    <a class="next3" href="#"></a>
+
+                </div>
+
+                <div id="slider3">
+                    <div class="carousel-box">
+                        <div class="inner">
+                            <div class="carousel main">
+                                <ul>
+                                    @foreach (var item in @ViewBag.gallery as List<Gallery>)
+                                    {
+                                        <li>
+                                            <div class="carousel1">
+                                                <div class="carousel1_inner">
+                                                    <a>
+                                                        <img src="/images/@item.Image" alt="" class="img" style="height:150px;">
+                                                        <div class="txt1">@item.Name</div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+    $(document).ready(function() {
+        //
+        $('#camera_wrap').camera({
+            //thumbnails: true
+            //alignment			: 'centerRight',
+            autoAdvance: true,
+            mobileAutoAdvance: true,
+            //fx					: 'simpleFade',
+            height: '46%',
+            hover: false,
+            loader: 'none',
+            navigation: true,
+            navigationHover: false,
+            mobileNavHover: false,
+            playPause: false,
+            pauseOnClick: false,
+            pagination: false,
+            time: 7000,
+            transPeriod: 1000,
+            minHeight: '200px'
+        });
+
+        //	carouFredSel
+        $('#slider3 .carousel.main ul').carouFredSel({
+            auto: {
+                timeoutDuration: 8000
+            },
+            responsive: true,
+            prev: '.prev3',
+            next: '.next3',
+            width: '100%',
+            scroll: {
+                items: 1,
+                duration: 1000,
+                easing: "easeOutExpo"
+            },
+            items: {
+                width: '400',
+                height: 'variable',	//	optionally resize item-height
+                visible: {
+                    min: 1,
+                    max: 3
+                }
+            },
+            mousewheel: false,
+            swipe: {
+                onMouse: true,
+                onTouch: true
+            }
+        });
+        $(window).bind("resize", updateSizes_vat).bind("load", updateSizes_vat);
+        function updateSizes_vat() {
+            $('#slider3 .carousel.main ul').trigger("updateSizes");
+        }
+        updateSizes_vat();
+
+    }); //
+    $(window).load(function() {
+        //
+
+    }); //
+</script>
+
+
+
+
+
+

@@ -1,0 +1,180 @@
+﻿@using hbb_ges.EntityLayer.Concrete
+@model hbb_ges.EntityLayer.Concrete.Message
+@{
+    ViewData["Title"] = "Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    List<Category> category = hbb_ges.Controllers.HomeController.myCat();
+}
+<div class="menu_wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <div class="menu_inner clearfix">
+
+                    <div class="navbar navbar_">
+                        <div class="navbar-inner navbar-inner_">
+                            <a class="btn btn-navbar btn-navbar_" data-toggle="collapse" data-target=".nav-collapse_">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </a>
+                            <div class="nav-collapse nav-collapse_ collapse">
+                                <ul class="nav sf-menu clearfix ">
+
+                                    @foreach (var item in @category)
+                                    {
+                                        @if (@item.CategoryName == "Anasayfa")
+                                        {
+                                            <li><a href="/">@hbb_ges.Resources.Language.AnaSayfa</a></li>
+                                        }
+                                        @if (@item.CategoryName == "Hakkımızda")
+                                        {
+                                            <li><a href="/Home/About">@hbb_ges.Resources.Language.Hakkımızda</a></li>
+                                        }
+                                        @if (@item.CategoryName == "GES")
+                                        {
+                                            <li><a href="/Home/GES">@hbb_ges.Resources.Language.GES</a></li>
+                                        }
+                                        @if (@item.CategoryName == "Galeri")
+                                        {
+                                            <li><a href="/Home/Gallery">@hbb_ges.Resources.Language.Galeri</a></li>
+                                        }
+                                        @if (@item.CategoryName == "İletişim")
+                                        {
+                                            <li class="active"><a href="/Home/Contact">@hbb_ges.Resources.Language.İletişim</a></li>
+                                        }
+
+
+                                    }
+
+
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="breadcrumbs1_wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <div class="breadcrumbs1"><a href="index.html">Home</a><span></span>Contacts</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="content">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <div id="content_inner">
+
+                    <div class="row">
+                        <div class="span8">
+                            <div class="pad_left1">
+                                @foreach (var item in @ViewBag.contacts as List<Contact>)
+                                {
+
+
+                                    @if (@item.ContactTitle.Equals("Harita"))
+                                    {
+                                        <h1>@hbb_ges.Resources.Language.adres</h1>
+                                        <figure class="google_map">
+                                            <iframe src="@item.Map"></iframe>
+                                        </figure>
+                                        <br>
+                                        <p>
+                                            <strong>HBBGES</strong>
+                                        </p>
+                                        <p>
+                                            @item.ContactDescription<br>
+                                        </p>
+                                    }
+                                    @if (@item.ContactTitle.Equals("Telefon"))
+                                    {
+                                        <p>
+                                            @item.ContactTitle: @item.ContactDescription<br>
+                                        </p>
+                                    }
+                                    @if (@item.ContactTitle.Equals("Mail"))
+                                    {
+                                        <p>
+                                            @item.ContactTitle: <a href="#">@item.ContactDescription</a>
+                                        </p>
+                                    }
+                                }
+
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="pad_left1 pad_right1">
+
+                        <h2 style="font-variant-caps:normal;">@hbb_ges.Resources.Language.İletişim <span>Form</span></h2>
+
+                        <div id="note"></div>
+                        <div id="fields">
+                            @using (Html.BeginForm("Contact", "Home", FormMethod.Post, new { @id = "ajax-contact-form", @class = "form-horizantal" }))
+                            {
+                                <div class="block1 clearfix">
+                                    <div class="block3">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                @Html.TextBoxFor(x=> x.username,new{@class="form-control",@placeholder=@hbb_ges.Resources.Language.Adsoyad})
+                                                @Html.ValidationMessageFor(x=> x.username)
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                @Html.TextBoxFor(x=> x.mail,new{@type="email",@class="form-control",@placeholder=@hbb_ges.Resources.Language.email})
+                                                @Html.ValidationMessageFor(x=> x.mail)
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                @Html.TextBoxFor(x=> x.subject,new{@type="text",@class="form-control",@placeholder=@hbb_ges.Resources.Language.Konu})
+                                                @Html.ValidationMessageFor(x=> x.subject)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="block4">
+                                        <div class="control-group">
+                                            <label class="control-label" for="inputMessage">Mesaj:</label>
+                                            <div class="controls">
+                                                @Html.TextAreaFor(x=> x.message,5,2,new{@type="text",@class="form-control",@placeholder=@hbb_ges.Resources.Language.Mesaj})
+                                                @Html.ValidationMessageFor(x=> x.message)
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="block2 clearfix">
+                                    <div class="">
+                                        <div class="control-group capthca">
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="submit">@hbb_ges.Resources.Language.kaydet</button>
+                                
+                            }
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
